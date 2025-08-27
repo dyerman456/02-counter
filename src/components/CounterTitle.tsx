@@ -1,5 +1,3 @@
-import {useEffect} from "react";
-
 type Props = {
   startValue: number
   maxValue: number
