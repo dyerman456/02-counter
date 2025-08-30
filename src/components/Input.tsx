@@ -7,6 +7,7 @@ type Props = {
 }
 
 export const Input = (props: Props) => {
+  debugger
 
   const {className, setValue, value} = props
 

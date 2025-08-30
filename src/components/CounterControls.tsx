@@ -8,6 +8,8 @@ type Props = {
   isSetPressed: boolean
   resetCounterValue: () => void
   startValue: number
+  checkStartValue: number
+  checkMaxValue: number
 }
 
 export const CounterControls = (props: Props) => {
@@ -18,15 +20,18 @@ export const CounterControls = (props: Props) => {
     maxValue,
     isSetPressed,
     resetCounterValue,
-    startValue} = props
+    startValue,
+    checkStartValue,
+    checkMaxValue
+  } = props
 
 
   return (
     <div className="container counter-controls">
       <Button className="button counter-controls__button" title="inc" callback={increaseCounterValue}
-              isDisabled={counterValue >= maxValue || !isSetPressed}/>
+              isDisabled={counterValue >= maxValue || !isSetPressed || checkStartValue !== startValue}/>
       <Button className="button counter-controls__button" title="res" callback={resetCounterValue}
-              isDisabled={counterValue === startValue || !isSetPressed}/>
+              isDisabled={counterValue === startValue || !isSetPressed || checkMaxValue !== maxValue}/>
     </div>
   )
 }
