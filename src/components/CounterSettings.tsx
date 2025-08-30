@@ -10,8 +10,8 @@ type Props = {
   setValues: () => void
   isSetDisabled: boolean
   setIsSetDisabled: (isSetDisabled: boolean) => void
-  checkStartValue: number
-  checkMaxValue: number
+  appliedStartValue: number
+  appliedMaxValue: number
 }
 
 export const CounterSettings = (props: Props) => {
@@ -22,16 +22,15 @@ export const CounterSettings = (props: Props) => {
     startValue,
     setStartValue,
     setValues,
-    isSetDisabled,
-    setIsSetDisabled,
-    checkStartValue,
-    checkMaxValue
+    appliedStartValue,
+    appliedMaxValue
   } = props
 
   const [error, setError] = useState<string | null>(null) // error
 
   useEffect(() => {
-    setIsSetDisabled(startValue >= 0 && maxValue >= 0 && startValue === checkStartValue && maxValue === checkMaxValue)
+    // setIsSetDisabled(startValue >= 0 && maxValue >= 0 && startValue === appliedStartValue && maxValue === appliedMaxValue)
+    //  || startValue >= maxValue
     if (startValue >= maxValue || startValue < 0 || maxValue < 0) {
       setError("error")
     } else {
@@ -52,7 +51,7 @@ export const CounterSettings = (props: Props) => {
         </div>
       </div>
       <div className="container">
-        <Button className="button" title="set" callback={setValues} isDisabled={isSetDisabled}/>
+        <Button className="button" title="set" callback={setValues} isDisabled={startValue < 0 || startValue >= maxValue || startValue === appliedStartValue && maxValue === appliedMaxValue}/>
       </div>
     </div>
   )

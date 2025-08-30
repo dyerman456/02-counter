@@ -11,14 +11,10 @@ function App() {
   const [startValue, setStartValue] = useState<number>(0) // min value from input
   const [maxValue, setMaxValue] = useState<number>(1) // max value from input
 
-  const [checkStartValue, setCheckStartValue] = useState(startValue)
-  const [checkMaxValue, setCheckMaxValue] = useState(maxValue)
+  const [appliedStartValue, setAppliedStartValue] = useState(startValue) // applied start value after button click
+  const [appliedMaxValue, setAppliedMaxValue] = useState(maxValue) // applied max value after button click
 
-  // Сравнить, равны ли переменные в момент когда мы меняем инпуты
-
-  const [isSetDisabled, setIsSetDisabled] = useState(false)
-
-  const [isSetPressed, setIsSetPressed] = useState(false) // if set button pressed
+  const [isSetDisabled, setIsSetDisabled] = useState(false) // if set button disabled
 
   const increaseCounterValue = () => {
     setCounterValue(prevState => {
@@ -34,14 +30,11 @@ function App() {
 
   const setValues = () => {
     setCounterValue(startValue)
-    setIsSetPressed(true)
-    setCheckStartValue(startValue)
-    setCheckMaxValue(maxValue)
+    setAppliedStartValue(startValue)
+    setAppliedMaxValue(maxValue)
     localStorage.setItem("counterValue", JSON.stringify(startValue))
     localStorage.setItem("minValue", JSON.stringify(startValue))
     localStorage.setItem("maxValue", JSON.stringify(maxValue))
-
-    localStorage.setItem("isSetPressed", JSON.stringify(true))
   }
 
   useEffect(() => {
@@ -49,8 +42,6 @@ function App() {
 
     let minValueAsString = localStorage.getItem("minValue")
     let maxValueAsString = localStorage.getItem("maxValue")
-
-    let isSetPressedAsString = localStorage.getItem("isSetPressed")
 
     if (typeof counterValueAsString === "string") {
       setCounterValue(JSON.parse(counterValueAsString))
@@ -64,20 +55,13 @@ function App() {
       setMaxValue(JSON.parse(maxValueAsString))
     }
 
-    if (typeof isSetPressedAsString === "string") {
-      setIsSetPressed(JSON.parse(isSetPressedAsString))
-    }
-
     if (typeof minValueAsString === "string") {
-      setCheckStartValue(JSON.parse(minValueAsString))
+      setAppliedStartValue(JSON.parse(minValueAsString))
     }
 
     if (typeof maxValueAsString === "string") {
-      setCheckMaxValue(JSON.parse(maxValueAsString))
+      setAppliedMaxValue(JSON.parse(maxValueAsString))
     }
-
-    console.log("check start value " + (startValue === checkStartValue))
-    console.log("check max value " + (maxValue === checkMaxValue))
   }, [])
 
   return (
@@ -86,18 +70,18 @@ function App() {
         <CounterTitle
           startValue={startValue}
           maxValue={maxValue}
-          isSetPressed={isSetPressed}
           counterValue={counterValue}
+          appliedStartValue={appliedStartValue}
+          appliedMaxValue={appliedMaxValue}
         />
         <CounterControls
           increaseCounterValue={increaseCounterValue}
           counterValue={counterValue}
           maxValue={maxValue}
-          isSetPressed={isSetPressed}
           resetCounterValue={resetCounterValue}
           startValue={startValue}
-          checkStartValue={checkStartValue}
-          checkMaxValue={checkMaxValue}
+          appliedStartValue={appliedStartValue}
+          appliedMaxValue={appliedMaxValue}
         />
       </div>
       <CounterSettings
@@ -106,8 +90,8 @@ function App() {
         startValue={startValue}
         setStartValue={setStartValue}
         setValues={setValues}
-        checkStartValue={checkStartValue}
-        checkMaxValue={checkMaxValue}
+        appliedStartValue={appliedStartValue}
+        appliedMaxValue={appliedMaxValue}
         isSetDisabled={isSetDisabled}
         setIsSetDisabled={setIsSetDisabled}
       />

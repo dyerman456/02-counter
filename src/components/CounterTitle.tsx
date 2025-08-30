@@ -1,13 +1,20 @@
 type Props = {
   startValue: number
   maxValue: number
-  isSetPressed: boolean
   counterValue: number
+  appliedStartValue: number
+  appliedMaxValue: number
 }
 
 export const CounterTitle = (props: Props) => {
 
-  const {startValue, maxValue, isSetPressed, counterValue} = props
+  const {
+    startValue,
+    maxValue,
+    counterValue,
+    appliedStartValue,
+    appliedMaxValue
+  } = props
 
   let counterTitle
 
@@ -15,22 +22,22 @@ export const CounterTitle = (props: Props) => {
     counterTitle = (
       <h1 className="counter-value counter-value-error">Incorrect value!</h1>
     );
-  } else if (isSetPressed) {
-    counterTitle = (
-      <h1 className={`counter-value ${maxValue === counterValue ? "counter-value-error" : ""}`}>
-        {counterValue}
-      </h1>
-    );
-  } else {
+  } else if (startValue !== appliedStartValue || maxValue !== appliedMaxValue) {
     counterTitle = (
       <h1 className="counter-value counter-value-set">
         enter values and press 'set'
       </h1>
     );
+  } else {
+    counterTitle = (
+      <h1 className={`counter-value ${maxValue === counterValue ? "counter-value-error" : ""}`}>
+        {counterValue}
+      </h1>
+    );
   }
 
   return (
-    <div className="container">
+    <div className="container title-container">
       {counterTitle}
     </div>
   )
