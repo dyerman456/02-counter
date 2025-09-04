@@ -5,7 +5,6 @@ import {CounterSettings} from "./components/CounterSettings";
 import {CounterTitle} from "./components/CounterTitle";
 
 function App() {
-  debugger
 
   const [counterValue, setCounterValue] = useState<number>(0) // value on the screen
   const [startValue, setStartValue] = useState<number>(0) // min value from input

@@ -1,6 +1,7 @@
-import {Input} from "./Input";
 import {Button} from "./Button";
 import React, {useEffect, useState} from "react";
+import {MaxValue} from "./MaxValue";
+import {StartValue} from "./StartValue";
 
 type Props = {
   maxValue: number
@@ -14,6 +15,8 @@ type Props = {
   appliedMaxValue: number
 }
 
+export type ErrorType = string | null
+
 export const CounterSettings = (props: Props) => {
 
   const {
@@ -26,11 +29,9 @@ export const CounterSettings = (props: Props) => {
     appliedMaxValue
   } = props
 
-  const [error, setError] = useState<string | null>(null) // error
+  const [error, setError] = useState<ErrorType>(null) // error
 
   useEffect(() => {
-    // setIsSetDisabled(startValue >= 0 && maxValue >= 0 && startValue === appliedStartValue && maxValue === appliedMaxValue)
-    //  || startValue >= maxValue
     if (startValue >= maxValue || startValue < 0 || maxValue < 0) {
       setError("error")
     } else {
@@ -41,14 +42,8 @@ export const CounterSettings = (props: Props) => {
   return (
     <div className="container settings">
       <div className="container settings__values">
-        <div className="settings__value">
-          <span>max value:</span>
-          <Input className={`input ${error}`} value={maxValue} setValue={setMaxValue}/>
-        </div>
-        <div className="settings__value">
-          <span>start value:</span>
-          <Input className={`input ${error}`} value={startValue} setValue={setStartValue}/>
-        </div>
+        <MaxValue error={error} maxValue={maxValue} setMaxValue={setMaxValue}/>
+        <StartValue error={error} startValue={startValue} setStartValue={setStartValue}/>
       </div>
       <div className="container">
         <Button className="button" title="set" callback={setValues} isDisabled={startValue < 0 || startValue >= maxValue || startValue === appliedStartValue && maxValue === appliedMaxValue}/>
