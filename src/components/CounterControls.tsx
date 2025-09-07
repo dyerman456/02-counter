@@ -7,8 +7,7 @@ type Props = {
   maxValue: number
   resetCounterValue: () => void
   startValue: number
-  appliedStartValue: number
-  appliedMaxValue: number
+  isValueChanged: boolean
 }
 
 export const CounterControls = (props: Props) => {
@@ -19,12 +18,11 @@ export const CounterControls = (props: Props) => {
     maxValue,
     resetCounterValue,
     startValue,
-    appliedStartValue,
-    appliedMaxValue
+    isValueChanged
   } = props
 
-  const isIncBtnDisabled = counterValue >= maxValue || startValue !== appliedStartValue || maxValue !== appliedMaxValue
-  const isResBtnDisabled = counterValue === startValue || startValue !== appliedStartValue || maxValue !== appliedMaxValue
+  const isIncBtnDisabled = counterValue >= maxValue || isValueChanged
+  const isResBtnDisabled = counterValue === startValue  || isValueChanged
 
   return (
     <div className="container counter-controls">

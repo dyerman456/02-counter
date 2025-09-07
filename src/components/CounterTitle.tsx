@@ -4,6 +4,7 @@ type Props = {
   counterValue: number
   appliedStartValue: number
   appliedMaxValue: number
+  isValueChanged: boolean
 }
 
 export const CounterTitle = (props: Props) => {
@@ -12,8 +13,7 @@ export const CounterTitle = (props: Props) => {
     startValue,
     maxValue,
     counterValue,
-    appliedStartValue,
-    appliedMaxValue
+    isValueChanged
   } = props
 
   let counterTitle
@@ -22,7 +22,7 @@ export const CounterTitle = (props: Props) => {
     counterTitle = (
       <h1 className="counter-value counter-value-error">Incorrect value!</h1>
     );
-  } else if (startValue !== appliedStartValue || maxValue !== appliedMaxValue) {
+  } else if (isValueChanged) {
     counterTitle = (
       <h1 className="counter-value counter-value-set">
         enter values and press 'set'

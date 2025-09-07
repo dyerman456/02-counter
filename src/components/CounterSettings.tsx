@@ -26,7 +26,7 @@ export const CounterSettings = (props: Props) => {
     setStartValue,
     setValues,
     appliedStartValue,
-    appliedMaxValue
+    appliedMaxValue,
   } = props
 
   const [error, setError] = useState<ErrorType>(null) // error
@@ -39,6 +39,8 @@ export const CounterSettings = (props: Props) => {
     }
   }, [startValue, maxValue])
 
+  const isBtnDisabled = startValue < 0 || startValue >= maxValue || startValue === appliedStartValue && maxValue === appliedMaxValue
+
   return (
     <div className="container settings">
       <div className="container settings__values">
@@ -46,7 +48,12 @@ export const CounterSettings = (props: Props) => {
         <StartValue error={error} startValue={startValue} setStartValue={setStartValue}/>
       </div>
       <div className="container">
-        <Button className="button" title="set" callback={setValues} isDisabled={startValue < 0 || startValue >= maxValue || startValue === appliedStartValue && maxValue === appliedMaxValue}/>
+        <Button
+          className="button"
+          title="set"
+          callback={setValues}
+          isDisabled={isBtnDisabled}
+        />
       </div>
     </div>
   )

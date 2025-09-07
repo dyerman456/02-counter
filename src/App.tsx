@@ -6,14 +6,15 @@ import {CounterTitle} from "./components/CounterTitle";
 
 function App() {
 
-  const [counterValue, setCounterValue] = useState<number>(0) // value on the screen
-  const [startValue, setStartValue] = useState<number>(0) // min value from input
-  const [maxValue, setMaxValue] = useState<number>(1) // max value from input
+  const [counterValue, setCounterValue] = useState(0) // value on the screen
+  const [startValue, setStartValue] = useState(0) // min value from input
+  const [maxValue, setMaxValue] = useState(1) // max value from input
 
   const [appliedStartValue, setAppliedStartValue] = useState(startValue) // applied start value after button click
   const [appliedMaxValue, setAppliedMaxValue] = useState(maxValue) // applied max value after button click
 
   const [isSetDisabled, setIsSetDisabled] = useState(false) // if set button disabled
+  const [isValueChanged, setIsValueChanged] = useState(false) // if input value was changed
 
   const increaseCounterValue = () => {
     setCounterValue(prevState => {
@@ -25,6 +26,7 @@ function App() {
 
   const resetCounterValue = () => {
     setCounterValue(startValue)
+    localStorage.setItem("counterValue", JSON.stringify(startValue))
   }
 
   const setValues = () => {
@@ -34,6 +36,7 @@ function App() {
     localStorage.setItem("counterValue", JSON.stringify(startValue))
     localStorage.setItem("minValue", JSON.stringify(startValue))
     localStorage.setItem("maxValue", JSON.stringify(maxValue))
+    setIsValueChanged(false)
   }
 
   useEffect(() => {
@@ -72,6 +75,7 @@ function App() {
           counterValue={counterValue}
           appliedStartValue={appliedStartValue}
           appliedMaxValue={appliedMaxValue}
+          isValueChanged={isValueChanged}
         />
         <CounterControls
           increaseCounterValue={increaseCounterValue}
@@ -79,15 +83,20 @@ function App() {
           maxValue={maxValue}
           resetCounterValue={resetCounterValue}
           startValue={startValue}
-          appliedStartValue={appliedStartValue}
-          appliedMaxValue={appliedMaxValue}
+          isValueChanged={isValueChanged}
         />
       </div>
       <CounterSettings
         maxValue={maxValue}
-        setMaxValue={setMaxValue}
+        setMaxValue={v => {
+          setMaxValue(v)
+          setIsValueChanged(true)
+        }}
         startValue={startValue}
-        setStartValue={setStartValue}
+        setStartValue={v => {
+          setStartValue(v)
+          setIsValueChanged(true)
+        }}
         setValues={setValues}
         appliedStartValue={appliedStartValue}
         appliedMaxValue={appliedMaxValue}
