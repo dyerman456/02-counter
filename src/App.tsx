@@ -73,8 +73,8 @@ function App() {
           startValue={startValue}
           maxValue={maxValue}
           counterValue={counterValue}
-          appliedStartValue={appliedStartValue}
-          appliedMaxValue={appliedMaxValue}
+          // appliedStartValue={appliedStartValue}
+          // appliedMaxValue={appliedMaxValue}
           isValueChanged={isValueChanged}
         />
         <CounterControls
@@ -100,8 +100,8 @@ function App() {
         setValues={setValues}
         appliedStartValue={appliedStartValue}
         appliedMaxValue={appliedMaxValue}
-        isSetDisabled={isSetDisabled}
-        setIsSetDisabled={setIsSetDisabled}
+        // isSetDisabled={isSetDisabled}
+        // setIsSetDisabled={setIsSetDisabled}
       />
     </div>
 

@@ -21,6 +21,7 @@ export const CounterControls = (props: Props) => {
     isValueChanged
   } = props
 
+
   const isIncBtnDisabled = counterValue >= maxValue || isValueChanged
   const isResBtnDisabled = counterValue === startValue  || isValueChanged
 

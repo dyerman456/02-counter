@@ -2,8 +2,6 @@ type Props = {
   startValue: number
   maxValue: number
   counterValue: number
-  appliedStartValue: number
-  appliedMaxValue: number
   isValueChanged: boolean
 }
 

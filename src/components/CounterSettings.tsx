@@ -9,8 +9,8 @@ type Props = {
   startValue: number
   setStartValue: (value: number) => void
   setValues: () => void
-  isSetDisabled: boolean
-  setIsSetDisabled: (isSetDisabled: boolean) => void
+  // isSetDisabled: boolean
+  // setIsSetDisabled: (isSetDisabled: boolean) => void
   appliedStartValue: number
   appliedMaxValue: number
 }
