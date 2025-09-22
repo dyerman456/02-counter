@@ -1,4 +1,4 @@
-import {CounterType} from "./AppSimpleCounter";
+import {CounterType} from "./App";
 
 const startValue = 0
 const maxValue = 5
