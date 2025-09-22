@@ -1,5 +1,5 @@
-import {Input} from "./Input";
-import {ErrorType} from "./CounterSettings";
+import { Input } from './Input'
+import { ErrorType } from './CounterSettings'
 
 type Props = {
   error: ErrorType
@@ -8,13 +8,16 @@ type Props = {
 }
 
 export const StartValue = (props: Props) => {
-
-  const {error, startValue, setStartValue} = props
+  const { error, startValue, setStartValue } = props
 
   return (
-    <div className="settings__value">
-    <span>start value:</span>
-      <Input className={`input ${error}`} value={startValue} setValue={setStartValue}/>
+    <div className='settings__value'>
+      <span>start value:</span>
+      <Input
+        className={`input ${error}`}
+        value={startValue}
+        setValue={setStartValue}
+      />
     </div>
   )
 }

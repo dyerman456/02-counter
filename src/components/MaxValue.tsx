@@ -1,6 +1,6 @@
-import {Input} from "./Input";
-import React from "react";
-import {ErrorType} from "./CounterSettings";
+import { Input } from './Input'
+import React from 'react'
+import { ErrorType } from './CounterSettings'
 
 type Props = {
   error: ErrorType
@@ -9,13 +9,16 @@ type Props = {
 }
 
 export const MaxValue = (props: Props) => {
-
-  const {error, maxValue, setMaxValue} = props
+  const { error, maxValue, setMaxValue } = props
 
   return (
-    <div className="settings__value">
+    <div className='settings__value'>
       <span>max value:</span>
-      <Input className={`input ${error}`} value={maxValue} setValue={setMaxValue}/>
+      <Input
+        className={`input ${error}`}
+        value={maxValue}
+        setValue={setMaxValue}
+      />
     </div>
   )
 }

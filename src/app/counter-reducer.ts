@@ -1,4 +1,4 @@
-import {CounterType} from "./App";
+import { CounterType } from './App'
 
 const startValue = 0
 const maxValue = 5
@@ -10,7 +10,7 @@ const initialState: CounterType = {
   appliedStartValue: startValue,
   appliedMaxValue: maxValue,
   isSetDisabled: false,
-  isValueChanged: false
+  isValueChanged: false,
 }
 
 type IncreaseCounterValueType = {
@@ -21,71 +21,81 @@ type IncreaseCounterValueType = {
 }
 
 type ResetCounterValueType = {
-  type: 'reset_counter_value',
+  type: 'reset_counter_value'
   payload: {
     startValue: number
   }
 }
 
 type SetStartValueType = {
-  type: 'set_start_value',
+  type: 'set_start_value'
   payload: {
     value: number
   }
 }
 
 type SetMaxValueType = {
-  type: 'set_max_value',
+  type: 'set_max_value'
   payload: {
     value: number
   }
 }
 
 type SetAppliedStartValueType = {
-  type: 'set_applied_start_value',
+  type: 'set_applied_start_value'
   payload: {
     value: number
   }
 }
 
 type SetAppliedMaxValueType = {
-  type: 'set_applied_max_value',
+  type: 'set_applied_max_value'
   payload: {
     value: number
   }
 }
 
 type SetIsValueChangedType = {
-  type: 'set_is_value_changed',
+  type: 'set_is_value_changed'
   payload: {
     boolean: boolean
   }
 }
 
-type ActionType = IncreaseCounterValueType | ResetCounterValueType | SetStartValueType | SetMaxValueType | SetAppliedStartValueType | SetAppliedMaxValueType | SetIsValueChangedType
+type ActionType =
+  | IncreaseCounterValueType
+  | ResetCounterValueType
+  | SetStartValueType
+  | SetMaxValueType
+  | SetAppliedStartValueType
+  | SetAppliedMaxValueType
+  | SetIsValueChangedType
 
-export const counterReducer = (state: CounterType = initialState, action: ActionType) => {
+export const counterReducer = (
+  state: CounterType = initialState,
+  action: ActionType,
+) => {
   switch (action.type) {
     case 'increase_counter_value': {
-      return {...state, counterValue: action.payload.counterValue + 1}
+      return { ...state, counterValue: action.payload.counterValue + 1 }
     }
     case 'reset_counter_value': {
-      return {...state, counterValue: action.payload.startValue}
+      return { ...state, counterValue: action.payload.startValue }
     }
     case 'set_start_value': {
-      return {...state, startValue: action.payload.value}
+      return { ...state, startValue: action.payload.value }
     }
     case 'set_max_value': {
-      return {...state, maxValue: action.payload.value}
+      return { ...state, maxValue: action.payload.value }
     }
     case 'set_applied_start_value': {
-      return {...state, appliedStartValue: action.payload.value}
+      return { ...state, appliedStartValue: action.payload.value }
     }
     case 'set_applied_max_value': {
-      return {...state, appliedMaxValue: action.payload.value}
+      return { ...state, appliedMaxValue: action.payload.value }
     }
     case 'set_is_value_changed': {
-      return {...state, isValueChanged: action.payload.boolean}
+      return { ...state, isValueChanged: action.payload.boolean }
     }
     default:
       return state
@@ -96,8 +106,8 @@ export const increaseCounterValueAC = (counterValue: number) => {
   return {
     type: 'increase_counter_value',
     payload: {
-      counterValue
-    }
+      counterValue,
+    },
   } as const
 }
 
@@ -105,8 +115,8 @@ export const resetCounterValueAC = (startValue: number) => {
   return {
     type: 'reset_counter_value',
     payload: {
-      startValue
-    }
+      startValue,
+    },
   } as const
 }
 
@@ -114,8 +124,8 @@ export const setStartValueAC = (value: number) => {
   return {
     type: 'set_start_value',
     payload: {
-      value
-    }
+      value,
+    },
   } as const
 }
 
@@ -123,8 +133,8 @@ export const setMaxValueAC = (value: number) => {
   return {
     type: 'set_max_value',
     payload: {
-      value
-    }
+      value,
+    },
   } as const
 }
 
@@ -132,8 +142,8 @@ export const setAppliedStartValueAC = (value: number) => {
   return {
     type: 'set_applied_start_value',
     payload: {
-      value
-    }
+      value,
+    },
   } as const
 }
 
@@ -141,8 +151,8 @@ export const setAppliedMaxValueAC = (value: number) => {
   return {
     type: 'set_applied_max_value',
     payload: {
-      value
-    }
+      value,
+    },
   } as const
 }
 
@@ -150,7 +160,7 @@ export const setIsValueChangedAC = (boolean: boolean) => {
   return {
     type: 'set_is_value_changed',
     payload: {
-      boolean
-    }
+      boolean,
+    },
   } as const
 }

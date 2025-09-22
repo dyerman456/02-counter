@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 type Props = {
   title: string
@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const Button = (props: Props) => {
-  const {title, className, callback, isDisabled} = props
+  const { title, className, callback, isDisabled } = props
 
   const onClickHandler = () => {
     if (callback) {
@@ -17,6 +17,12 @@ export const Button = (props: Props) => {
   }
 
   return (
-    <button className={className} onClick={onClickHandler} disabled={isDisabled}>{title}</button>
+    <button
+      className={className}
+      onClick={onClickHandler}
+      disabled={isDisabled}
+    >
+      {title}
+    </button>
   )
 }

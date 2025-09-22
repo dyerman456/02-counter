@@ -1,28 +1,30 @@
-import React, {useReducer} from 'react';
-import '../App.css';
+import React, { useReducer } from 'react'
+import '../App.css'
 import {
   counterReducer,
   increaseCounterValueAC,
-  resetCounterValueAC, setAppliedMaxValueAC, setAppliedStartValueAC, setIsValueChangedAC,
+  resetCounterValueAC,
+  setAppliedMaxValueAC,
+  setAppliedStartValueAC,
+  setIsValueChangedAC,
   setMaxValueAC,
-  setStartValueAC
-} from "./counter-reducer";
-import {CounterTitle} from "../components/CounterTitle";
-import {CounterControls} from "../components/CounterControls";
-import {CounterSettings} from "../components/CounterSettings";
+  setStartValueAC,
+} from './counter-reducer'
+import { CounterTitle } from '../components/CounterTitle'
+import { CounterControls } from '../components/CounterControls'
+import { CounterSettings } from '../components/CounterSettings'
 
 export type CounterType = {
-  counterValue: number, // value on the screen
-  startValue: number, // min value from input
+  counterValue: number // value on the screen
+  startValue: number // min value from input
   maxValue: number // max value from input
-  appliedStartValue: number, // applied start value after button click for title change
-  appliedMaxValue: number, // applied max value after button click for title change
+  appliedStartValue: number // applied start value after button click for title change
+  appliedMaxValue: number // applied max value after button click for title change
   isSetDisabled: boolean // if set button disabled
   isValueChanged: boolean // if input value was changed
 }
 
 function AppSimpleCounter() {
-
   const startValue = 0
   const maxValue = 5
 
@@ -33,7 +35,7 @@ function AppSimpleCounter() {
     appliedStartValue: startValue,
     appliedMaxValue: maxValue,
     isSetDisabled: false,
-    isValueChanged: false
+    isValueChanged: false,
   })
 
   const increaseCounterValue = () => {
@@ -72,8 +74,8 @@ function AppSimpleCounter() {
   }
 
   return (
-    <div className="App">
-      <div className="container">
+    <div className='App'>
+      <div className='container'>
         <CounterTitle
           startValue={counter.startValue}
           maxValue={counter.maxValue}
@@ -105,8 +107,7 @@ function AppSimpleCounter() {
         appliedMaxValue={counter.appliedMaxValue}
       />
     </div>
-
-  );
+  )
 }
 
-export default AppSimpleCounter;
+export default AppSimpleCounter
