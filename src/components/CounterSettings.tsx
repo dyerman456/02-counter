@@ -9,8 +9,6 @@ type Props = {
   startValue: number
   setStartValue: (value: number) => void
   setValues: () => void
-  // isSetDisabled: boolean
-  // setIsSetDisabled: (isSetDisabled: boolean) => void
   appliedStartValue: number
   appliedMaxValue: number
 }
@@ -39,7 +37,7 @@ export const CounterSettings = (props: Props) => {
     }
   }, [startValue, maxValue])
 
-  const isBtnDisabled = startValue < 0 || startValue >= maxValue || startValue === appliedStartValue && maxValue === appliedMaxValue
+  const isBtnDisabled = (startValue < 0 || startValue >= maxValue || startValue === appliedStartValue) && maxValue === appliedMaxValue
 
   return (
     <div className="container settings">
