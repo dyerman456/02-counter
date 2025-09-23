@@ -1,7 +1,6 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import '../App.css'
 import {
-  counterReducer,
   increaseCounterValueAC,
   resetCounterValueAC,
   setAppliedMaxValueAC,
@@ -13,6 +12,8 @@ import {
 import { CounterTitle } from '../components/CounterTitle'
 import { CounterControls } from '../components/CounterControls'
 import { CounterSettings } from '../components/CounterSettings'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from './store'
 
 export type CounterType = {
   counterValue: number // value on the screen
@@ -25,45 +26,36 @@ export type CounterType = {
 }
 
 function AppSimpleCounter() {
-  const startValue = 0
-  const maxValue = 5
+  const counter = useSelector<RootState, CounterType>((state) => state.counter)
 
-  const [counter, dispatchCounter] = useReducer(counterReducer, {
-    counterValue: 0,
-    startValue: startValue,
-    maxValue: maxValue,
-    appliedStartValue: startValue,
-    appliedMaxValue: maxValue,
-    isSetDisabled: false,
-    isValueChanged: false,
-  })
+  const dispatch = useDispatch()
 
   const increaseCounterValue = () => {
-    dispatchCounter(increaseCounterValueAC(counter.counterValue))
+    dispatch(increaseCounterValueAC(counter.counterValue))
   }
 
   const resetCounterValue = () => {
-    dispatchCounter(resetCounterValueAC(counter.startValue))
+    dispatch(resetCounterValueAC(counter.startValue))
   }
 
   const setMaxValue = (value: number) => {
-    dispatchCounter(setMaxValueAC(value))
+    dispatch(setMaxValueAC(value))
   }
 
   const setStartValue = (value: number) => {
-    dispatchCounter(setStartValueAC(value))
+    dispatch(setStartValueAC(value))
   }
 
   const setAppliedStartValue = () => {
-    dispatchCounter(setAppliedStartValueAC(counter.startValue))
+    dispatch(setAppliedStartValueAC(counter.startValue))
   }
 
   const setAppliedMaxValue = () => {
-    dispatchCounter(setAppliedMaxValueAC(counter.maxValue))
+    dispatch(setAppliedMaxValueAC(counter.maxValue))
   }
 
   const setIsValueChanged = (boolean: boolean) => {
-    dispatchCounter(setIsValueChangedAC(boolean))
+    dispatch(setIsValueChangedAC(boolean))
   }
 
   const setValues = () => {
