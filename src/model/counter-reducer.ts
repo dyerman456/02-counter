@@ -1,4 +1,4 @@
-import { CounterType } from './App'
+import { CounterType } from '../app/App'
 
 const startValue = 0
 const maxValue = 5
@@ -13,54 +13,13 @@ const initialState: CounterType = {
   isValueChanged: false,
 }
 
-type IncreaseCounterValueType = {
-  type: 'increase_counter_value'
-  payload: {
-    counterValue: number
-  }
-}
-
-type ResetCounterValueType = {
-  type: 'reset_counter_value'
-  payload: {
-    startValue: number
-  }
-}
-
-type SetStartValueType = {
-  type: 'set_start_value'
-  payload: {
-    value: number
-  }
-}
-
-type SetMaxValueType = {
-  type: 'set_max_value'
-  payload: {
-    value: number
-  }
-}
-
-type SetAppliedStartValueType = {
-  type: 'set_applied_start_value'
-  payload: {
-    value: number
-  }
-}
-
-type SetAppliedMaxValueType = {
-  type: 'set_applied_max_value'
-  payload: {
-    value: number
-  }
-}
-
-type SetIsValueChangedType = {
-  type: 'set_is_value_changed'
-  payload: {
-    boolean: boolean
-  }
-}
+type IncreaseCounterValueType = ReturnType<typeof increaseCounterValueAC>
+type ResetCounterValueType = ReturnType<typeof resetCounterValueAC>
+type SetStartValueType = ReturnType<typeof setStartValueAC>
+type SetMaxValueType = ReturnType<typeof setMaxValueAC>
+type SetAppliedStartValueType = ReturnType<typeof setAppliedStartValueAC>
+type SetAppliedMaxValueType = ReturnType<typeof setAppliedMaxValueAC>
+type SetIsValueChangedType = ReturnType<typeof setIsValueChangedAC>
 
 type ActionType =
   | IncreaseCounterValueType
