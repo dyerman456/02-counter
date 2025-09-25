@@ -8,12 +8,13 @@ import {
   setIsValueChangedAC,
   setMaxValueAC,
   setStartValueAC,
-} from './counter-reducer'
+} from '../model/counter-reducer'
 import { CounterTitle } from '../components/CounterTitle'
 import { CounterControls } from '../components/CounterControls'
 import { CounterSettings } from '../components/CounterSettings'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from './store'
+import { useAppDispatch } from '../common/hooks/useAppDispatch'
+import { useAppSelector } from '../common/hooks/useAppSelector'
+import { selectCounter } from '../model/counter-selectors'
 
 export type CounterType = {
   counterValue: number // value on the screen
@@ -26,36 +27,40 @@ export type CounterType = {
 }
 
 function AppSimpleCounter() {
-  const counter = useSelector<RootState, CounterType>((state) => state.counter)
+  const counter = useAppSelector(selectCounter)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const increaseCounterValue = () => {
-    dispatch(increaseCounterValueAC(counter.counterValue))
+    const counterValue = counter.counterValue
+    dispatch(increaseCounterValueAC({ counterValue }))
   }
 
   const resetCounterValue = () => {
-    dispatch(resetCounterValueAC(counter.startValue))
-  }
-
-  const setMaxValue = (value: number) => {
-    dispatch(setMaxValueAC(value))
+    const startValue = counter.startValue
+    dispatch(resetCounterValueAC({ startValue }))
   }
 
   const setStartValue = (value: number) => {
-    dispatch(setStartValueAC(value))
+    dispatch(setStartValueAC({ value }))
+  }
+
+  const setMaxValue = (value: number) => {
+    dispatch(setMaxValueAC({ value }))
   }
 
   const setAppliedStartValue = () => {
-    dispatch(setAppliedStartValueAC(counter.startValue))
+    const startValue = counter.startValue
+    dispatch(setAppliedStartValueAC({ startValue }))
   }
 
   const setAppliedMaxValue = () => {
-    dispatch(setAppliedMaxValueAC(counter.maxValue))
+    const maxValue = counter.maxValue
+    dispatch(setAppliedMaxValueAC({ maxValue }))
   }
 
   const setIsValueChanged = (boolean: boolean) => {
-    dispatch(setIsValueChangedAC(boolean))
+    dispatch(setIsValueChangedAC({ boolean }))
   }
 
   const setValues = () => {
