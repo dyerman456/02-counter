@@ -1,18 +1,6 @@
 import { CounterType } from '../app/App'
-import { createAction } from '@reduxjs/toolkit'
+import { createAction, createReducer } from '@reduxjs/toolkit'
 
-const startValue = 0
-const maxValue = 5
-
-const initialState: CounterType = {
-  counterValue: 0,
-  startValue: startValue,
-  maxValue: maxValue,
-  appliedStartValue: startValue,
-  appliedMaxValue: maxValue,
-  isSetDisabled: false,
-  isValueChanged: false,
-}
 export const increaseCounterValueAC = createAction<{ counterValue: number }>(
   'counter/increaseCounterValue',
 )
@@ -41,50 +29,40 @@ export const setIsValueChangedAC = createAction<{ boolean: boolean }>(
   'counter/setIsValueChanged',
 )
 
-type IncreaseCounterValueType = ReturnType<typeof increaseCounterValueAC>
-type ResetCounterValueType = ReturnType<typeof resetCounterValueAC>
-type SetStartValueType = ReturnType<typeof setStartValueAC>
-type SetMaxValueType = ReturnType<typeof setMaxValueAC>
-type SetAppliedStartValueType = ReturnType<typeof setAppliedStartValueAC>
-type SetAppliedMaxValueType = ReturnType<typeof setAppliedMaxValueAC>
-type SetIsValueChangedType = ReturnType<typeof setIsValueChangedAC>
+const startValue = 0
+const maxValue = 5
 
-type ActionType =
-  | IncreaseCounterValueType
-  | ResetCounterValueType
-  | SetStartValueType
-  | SetMaxValueType
-  | SetAppliedStartValueType
-  | SetAppliedMaxValueType
-  | SetIsValueChangedType
-
-export const counterReducer = (
-  state: CounterType = initialState,
-  action: ActionType,
-) => {
-  switch (action.type) {
-    case 'increase_counter_value': {
-      return { ...state, counterValue: action.payload.counterValue + 1 }
-    }
-    case 'reset_counter_value': {
-      return { ...state, counterValue: action.payload.startValue }
-    }
-    case 'set_start_value': {
-      return { ...state, startValue: action.payload.value }
-    }
-    case 'set_max_value': {
-      return { ...state, maxValue: action.payload.value }
-    }
-    case 'set_applied_start_value': {
-      return { ...state, appliedStartValue: action.payload.value }
-    }
-    case 'set_applied_max_value': {
-      return { ...state, appliedMaxValue: action.payload.value }
-    }
-    case 'set_is_value_changed': {
-      return { ...state, isValueChanged: action.payload.boolean }
-    }
-    default:
-      return state
-  }
+const initialState: CounterType = {
+  counterValue: 0,
+  startValue: startValue,
+  maxValue: maxValue,
+  appliedStartValue: startValue,
+  appliedMaxValue: maxValue,
+  isSetDisabled: false,
+  isValueChanged: false,
 }
+
+export const counterReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(increaseCounterValueAC, (state) => {
+      state.counterValue += 1
+    })
+    .addCase(resetCounterValueAC, (state, action) => {
+      state.counterValue = action.payload.startValue
+    })
+    .addCase(setStartValueAC, (state, action) => {
+      state.startValue = action.payload.value
+    })
+    .addCase(setMaxValueAC, (state, action) => {
+      state.maxValue = action.payload.value
+    })
+    .addCase(setAppliedStartValueAC, (state, action) => {
+      state.appliedStartValue = action.payload.startValue
+    })
+    .addCase(setAppliedMaxValueAC, (state, action) => {
+      state.appliedMaxValue = action.payload.maxValue
+    })
+    .addCase(setIsValueChangedAC, (state, action) => {
+      state.isValueChanged = action.payload.boolean
+    })
+})
