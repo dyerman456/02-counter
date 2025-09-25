@@ -1,4 +1,5 @@
 import { CounterType } from '../app/App'
+import { createAction } from '@reduxjs/toolkit'
 
 const startValue = 0
 const maxValue = 5
@@ -12,6 +13,33 @@ const initialState: CounterType = {
   isSetDisabled: false,
   isValueChanged: false,
 }
+export const increaseCounterValueAC = createAction<{ counterValue: number }>(
+  'counter/increaseCounterValue',
+)
+
+export const resetCounterValueAC = createAction<{ startValue: number }>(
+  'counter/resetCounterValue',
+)
+
+export const setStartValueAC = createAction<{ value: number }>(
+  'counter/setStartValue',
+)
+
+export const setMaxValueAC = createAction<{ value: number }>(
+  'counter/setMaxValue',
+)
+
+export const setAppliedStartValueAC = createAction<{ startValue: number }>(
+  'counter/setAppliedStartValue',
+)
+
+export const setAppliedMaxValueAC = createAction<{ maxValue: number }>(
+  'counter/setAppliedMaxValue',
+)
+
+export const setIsValueChangedAC = createAction<{ boolean: boolean }>(
+  'counter/setIsValueChanged',
+)
 
 type IncreaseCounterValueType = ReturnType<typeof increaseCounterValueAC>
 type ResetCounterValueType = ReturnType<typeof resetCounterValueAC>
@@ -59,67 +87,4 @@ export const counterReducer = (
     default:
       return state
   }
-}
-
-export const increaseCounterValueAC = (counterValue: number) => {
-  return {
-    type: 'increase_counter_value',
-    payload: {
-      counterValue,
-    },
-  } as const
-}
-
-export const resetCounterValueAC = (startValue: number) => {
-  return {
-    type: 'reset_counter_value',
-    payload: {
-      startValue,
-    },
-  } as const
-}
-
-export const setStartValueAC = (value: number) => {
-  return {
-    type: 'set_start_value',
-    payload: {
-      value,
-    },
-  } as const
-}
-
-export const setMaxValueAC = (value: number) => {
-  return {
-    type: 'set_max_value',
-    payload: {
-      value,
-    },
-  } as const
-}
-
-export const setAppliedStartValueAC = (value: number) => {
-  return {
-    type: 'set_applied_start_value',
-    payload: {
-      value,
-    },
-  } as const
-}
-
-export const setAppliedMaxValueAC = (value: number) => {
-  return {
-    type: 'set_applied_max_value',
-    payload: {
-      value,
-    },
-  } as const
-}
-
-export const setIsValueChangedAC = (boolean: boolean) => {
-  return {
-    type: 'set_is_value_changed',
-    payload: {
-      boolean,
-    },
-  } as const
 }
