@@ -1,4 +1,3 @@
-import { CounterType } from '../app/App'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 export const increaseCounterValueAC = createAction<{ counterValue: number }>(
@@ -28,6 +27,16 @@ export const setAppliedMaxValueAC = createAction<{ maxValue: number }>(
 export const setIsValueChangedAC = createAction<{ boolean: boolean }>(
   'counter/setIsValueChanged',
 )
+
+export type CounterType = {
+  counterValue: number // value on the screen
+  startValue: number // min value from input
+  maxValue: number // max value from input
+  appliedStartValue: number // applied start value after button click for title change
+  appliedMaxValue: number // applied max value after button click for title change
+  isSetDisabled: boolean // if set button disabled
+  isValueChanged: boolean // if input value was changed
+}
 
 const startValue = 0
 const maxValue = 5

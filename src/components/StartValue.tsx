@@ -2,8 +2,7 @@ import { Input } from './Input'
 import { ErrorType } from './CounterSettings'
 import { useAppDispatch } from '../common/hooks/useAppDispatch'
 import { useAppSelector } from '../common/hooks/useAppSelector'
-import { selectMaxValue } from '../model/maxValue-selector'
-import { setIsValueChangedAC, setMaxValueAC, setStartValueAC } from '../model/counter-reducer'
+import { setIsValueChangedAC, setStartValueAC } from '../model/counter-reducer'
 import { selectStartValue } from '../model/startValue-selector'
 
 type Props = {
