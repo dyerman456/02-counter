@@ -1,14 +1,29 @@
 import { Input } from './Input'
 import { ErrorType } from './CounterSettings'
+import { useAppDispatch } from '../common/hooks/useAppDispatch'
+import { useAppSelector } from '../common/hooks/useAppSelector'
+import { selectMaxValue } from '../model/maxValue-selector'
+import { setIsValueChangedAC, setMaxValueAC, setStartValueAC } from '../model/counter-reducer'
+import { selectStartValue } from '../model/startValue-selector'
 
 type Props = {
   error: ErrorType
-  startValue: number
-  setStartValue: (value: number) => void
 }
 
 export const StartValue = (props: Props) => {
-  const { error, startValue, setStartValue } = props
+  const { error } = props
+
+  const dispatch = useAppDispatch()
+  const startValue = useAppSelector(selectStartValue)
+
+  const setIsValueChanged = (boolean: boolean) => {
+    dispatch(setIsValueChangedAC({ boolean }))
+  }
+
+  const setStartValue = (value: number) => {
+    dispatch(setStartValueAC({ value }))
+    setIsValueChanged(true)
+  }
 
   return (
     <div className='settings__value'>

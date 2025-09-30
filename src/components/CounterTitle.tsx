@@ -1,12 +1,15 @@
-type Props = {
-  startValue: number
-  maxValue: number
-  counterValue: number
-  isValueChanged: boolean
-}
+import { useAppSelector } from '../common/hooks/useAppSelector'
+import { selectMaxValue } from '../model/maxValue-selector'
+import { selectStartValue } from '../model/startValue-selector'
+import { selectCounterValue } from '../model/counterValue-selector'
+import { selectIsValueChanged } from '../model/isValueChanged-selector'
 
-export const CounterTitle = (props: Props) => {
-  const { startValue, maxValue, counterValue, isValueChanged } = props
+export const CounterTitle = () => {
+
+  const counterValue = useAppSelector(selectCounterValue)
+  const startValue = useAppSelector(selectStartValue)
+  const maxValue = useAppSelector(selectMaxValue)
+  const isValueChanged = useAppSelector(selectIsValueChanged)
 
   let counterTitle
 

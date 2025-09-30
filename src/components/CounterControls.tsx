@@ -1,24 +1,31 @@
 import { Button } from './Button'
 import React from 'react'
+import { useAppSelector } from '../common/hooks/useAppSelector'
+import {
+  increaseCounterValueAC,
+  resetCounterValueAC,
+} from '../model/counter-reducer'
+import { selectCounterValue } from '../model/counterValue-selector'
+import { useAppDispatch } from '../common/hooks/useAppDispatch'
+import { selectStartValue } from '../model/startValue-selector'
+import { selectMaxValue } from '../model/maxValue-selector'
+import { selectIsValueChanged } from '../model/isValueChanged-selector'
 
-type Props = {
-  increaseCounterValue: () => void
-  counterValue: number
-  maxValue: number
-  resetCounterValue: () => void
-  startValue: number
-  isValueChanged: boolean
-}
+export const CounterControls = () => {
 
-export const CounterControls = (props: Props) => {
-  const {
-    increaseCounterValue,
-    counterValue,
-    maxValue,
-    resetCounterValue,
-    startValue,
-    isValueChanged,
-  } = props
+  const dispatch = useAppDispatch()
+  const counterValue = useAppSelector(selectCounterValue)
+  const startValue = useAppSelector(selectStartValue)
+  const maxValue = useAppSelector(selectMaxValue)
+  const isValueChanged = useAppSelector(selectIsValueChanged)
+
+  const increaseCounterValue = () => {
+    dispatch(increaseCounterValueAC({ counterValue }))
+  }
+
+  const resetCounterValue = () => {
+    dispatch(resetCounterValueAC({ startValue }))
+  }
 
   const isIncBtnDisabled = counterValue >= maxValue || isValueChanged
   const isResBtnDisabled = counterValue === startValue || isValueChanged
